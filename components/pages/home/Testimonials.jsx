@@ -252,7 +252,7 @@ const testimonials = [
 // Testimonials section
 export function Testimonials() {
   return (
-    <section id="testimonials" className="container mx-auto py-10">
+    <section id="testimonials" className="container mx-auto py-32">
       <h2 className="mb-4 text-center text-5xl font-bold leading-[1.2] tracking-tighter text-foreground">
         What People Are Saying
       </h2>

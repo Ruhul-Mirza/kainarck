@@ -44,8 +44,8 @@ const stats = [
 
 function StatsCard({ item }) {
   return (
-    <div className="p-6 w-full max-w-xs mx-auto rounded-xl border border-white/20 bg-white/50 backdrop-blur-3xl shadow-lg flex items-center 
-  dark:bg-transparent dark:border-zinc-500/10">
+    <div className="p-4 sm:p-6 w-full max-w-xs mx-auto rounded-xl border border-white/20 bg-white/50 backdrop-blur-3xl shadow-lg flex items-center 
+  dark:bg-transparent dark:border-purple-950/50">
   
       <div className={`p-2 bg-${item.bg} rounded-lg mr-3 shrink-0`}>
         <svg className={`w-5 h-5 text-${item.color}-600`} fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -67,7 +67,7 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="rounded-xl border text-card-foreground shadow h-full overflow-hidden border-border/40 bg-gradient-to-b from-card to-card/50 backdrop-blur transition-all hover:shadow-md group dark:hover:bg-white/[0.]"
+              className="rounded-xl border text-card-foreground shadow h-full overflow-hidden border-border/40 bg-gradient-to-b from-card to-card/50 backdrop-blur transition-all hover:shadow-md group dark:hover:bg-white/[0.1]"
             >
               <div className="p-6 flex flex-col h-full">
                 <div className="size-12 rounded-full bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center mb-4 transition-colors duration-300">

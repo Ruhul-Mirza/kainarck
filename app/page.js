@@ -15,19 +15,19 @@ import { TechStackSection } from "@/components/pages/home/TechStack";
 import HowItWorks from "@/components/pages/home/HowItWorks";
 import ServicesSection from "@/components/pages/home/Services";
 import StatsSection from "@/components/pages/home/StatsSection";
+import CallToAction from "@/components/pages/CallToAction";
 
 export default function Home() {
   return (
     <>
       <HeroSection />
       {/* <PerformanceSection/>  */}
-      {/* <WhoWeAre/> */}
       <TechStackSection/>
+      <WhoWeAre/>
       <WhyChooseUsSection/> 
-      {/* <ServicesSection/> */}
-      <HowItWorks/>
+      <ServicesSection/>
       <Testimonials/>
-      <Newsletter/>
+      <CallToAction/>
     
       {/* <Logos/> */}
       {/* <StickyScrollRevealDemo/> */}
