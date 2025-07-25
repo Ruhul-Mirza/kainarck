@@ -152,7 +152,7 @@ export function NavbarDemo() {
     },
   ];
   return (
-    <header className="sticky z-[110] top-0 py-5">
+    <header className="sticky z-[1000] top-0 py-5">
       <Navbar>
         {/* Desktop Navigation */}
         <NavBody>
