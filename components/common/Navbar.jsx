@@ -162,8 +162,12 @@ export function NavbarDemo() {
               alt="Kainarck Logo"
               width={"auto"}
               height={120}
-              className="w-auto object-contain"
               priority
+              className={`
+        w-auto h-[120px] object-contain
+        transition-all duration-300
+        dark:filter dark:backdrop-grayscale-100 dark:brightness-200
+      `}
             />
           </div>
           <NavItems items={navItems} />
@@ -195,7 +199,9 @@ export function NavbarDemo() {
                 alt="Kainarck Logo"
                 width={"auto"}
                 height={120}
-                className="w-auto"
+                className=" w-auto h-[120px] object-contain
+        transition-all duration-300
+        dark:filter dark:backdrop-grayscale-100 dark:brightness-200"
               />
             </div>
 
