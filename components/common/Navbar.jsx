@@ -152,20 +152,20 @@ export function NavbarDemo() {
     },
   ];
   return (
-    <header className="sticky z-50 top-0 py-5">
+    <header className="sticky z-[110] top-0 py-5">
       <Navbar>
         {/* Desktop Navigation */}
         <NavBody>
-<div className="flex items-center h-12">
-  <Image
-    src={theme === "dark" ? darkLogo : logo}
-    alt="Kainarck Logo"
-    width={160}
-    height={50}
-    className="h-full w-auto object-contain"
-    priority
-  />
-</div>
+          <div className="flex items-center h-12">
+            <Image
+              src={theme === "dark" ? darkLogo : logo}
+              alt="Kainarck Logo"
+              width={"auto"}
+              height={120}
+              className="w-auto object-contain"
+              priority
+            />
+          </div>
           <NavItems items={navItems} />
           <div className="flex items-center select-none gap-4">
             <NavbarButton
@@ -190,14 +190,14 @@ export function NavbarDemo() {
         <MobileNav>
           <MobileNavHeader>
             <div className="flex items-center h-10">
-  <Image
-    src={theme === "dark" ? darkLogo : logo}
-    alt="Kainarck Logo"
-    width={140}
-    height={40}
-    className="h-full w-auto object-contain"
-  />
-</div>
+              <Image
+                src={theme === "dark" ? darkLogo : logo}
+                alt="Kainarck Logo"
+                width={"auto"}
+                height={120}
+                className="w-auto"
+              />
+            </div>
 
             <div className="flex items-center space-x-3">
               <NavbarButton
