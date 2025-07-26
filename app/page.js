@@ -17,7 +17,6 @@ import ServicesSection from "@/components/pages/home/Services";
 import StatsSection from "@/components/pages/home/StatsSection";
 import CallToAction from "@/components/pages/CallToAction";
 import { useLenis } from "@/hook/useLenis";
-import ScrollAnimatedCardsSection from "@/components/pages/home/ScrollAnimatedCardsSection";
 
 export default function Home() {
   useLenis()
