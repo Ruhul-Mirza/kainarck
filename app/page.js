@@ -10,14 +10,17 @@ import WhyChooseUsSection from "@/components/pages/home/WhyChooseUsSection";
 import { Logos } from "@/components/pages/home/IconCloud";
 import Simple3DCardLayout from "@/components/pages/home/Demo";
 import { ServicesOverview } from "@/components/pages/home/services-overview";
-import { StickyScrollRevealDemo } from "@/components/pages/home/StickyScroll";
+import { StickyScrollRevealDemo, StickyScrollRevealLenisDemo } from "@/components/pages/home/StickyScroll";
 import { TechStackSection } from "@/components/pages/home/TechStack";
 import HowItWorks from "@/components/pages/home/HowItWorks";
 import ServicesSection from "@/components/pages/home/Services";
 import StatsSection from "@/components/pages/home/StatsSection";
 import CallToAction from "@/components/pages/CallToAction";
+import { useLenis } from "@/hook/useLenis";
+import ScrollAnimatedCardsSection from "@/components/pages/home/ScrollAnimatedCardsSection";
 
 export default function Home() {
+  useLenis()
   return (
     <>
       <HeroSection />
@@ -27,10 +30,11 @@ export default function Home() {
       <WhyChooseUsSection/> 
       <ServicesSection/>
       <Testimonials/>
-      <CallToAction/>
+      {/* <ScrollAnimatedCardsSection/> */}
     
       {/* <Logos/> */}
       {/* <StickyScrollRevealDemo/> */}
+      <StickyScrollRevealLenisDemo/>
       {/* <ServicesOverview/> */}
     </>
   );

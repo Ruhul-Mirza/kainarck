@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 
 function CallToAction() {
   return (
-    <div className="pb-36 px-3">
+    <div className="px-3">
       <div className="z-10 mt-4 flex flex-col items-center text-center text-primary gap-3">
         <h2 className="text-3xl font-semibold tracking-tight text-black dark:text-white sm:text-4xl">
           Ready for a speed up?

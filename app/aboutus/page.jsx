@@ -1,9 +1,12 @@
+'use client'
 import { BoxReveal } from '@/components/magicui/box-reveal';
+import { useLenis } from '@/hook/useLenis';
 import clsx from 'clsx';
 import { Badge, Globe, Trophy, Users, Zap, Rocket, Brain, Code2, Shield } from 'lucide-react';
 import React from 'react'
 
 function page() {
+  useLenis()
   const values = [
     {
       icon: (

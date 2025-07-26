@@ -1,16 +1,15 @@
 "use client";
-import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
+import { StickyScrollLenis } from "@/components/ui/sticky-scroll-reveal";
 import React from "react";
-
+import CallToAction from "../CallToAction";
 
 const content = [
   {
     title: "Collaborative Editing",
     description:
-      "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
+      "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly.",
     content: (
-      <div
-        className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
+      <div className="flex h-full w-full items-center justify-center text-white bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))]">
         Collaborative Editing
       </div>
     ),
@@ -18,7 +17,7 @@ const content = [
   {
     title: "Real time changes",
     description:
-      "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
+      "Track every modification in real time. Say goodbye to version control chaos and embrace real-time updates.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
         <img
@@ -26,17 +25,17 @@ const content = [
           width={300}
           height={300}
           className="h-full w-full object-cover"
-          alt="linear board demo" />
+          alt="linear board demo"
+        />
       </div>
     ),
   },
   {
     title: "Version control",
     description:
-      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+      "Never stress about version control again. Our platform ensures you're always working on the latest version.",
     content: (
-      <div
-        className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
+      <div className="flex h-full w-full items-center justify-center text-white bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))]">
         Version control
       </div>
     ),
@@ -44,19 +43,34 @@ const content = [
   {
     title: "Running out of content",
     description:
-      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+      "You’re always synced and aligned — no more confusion or duplication. Always real-time, always organized.",
     content: (
-      <div
-        className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
+      <div className="flex h-full w-full items-center justify-center text-white bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))]">
         Running out of content
       </div>
     ),
   },
 ];
-export function StickyScrollRevealDemo() {
+
+export function StickyScrollRevealLenisDemo() {
   return (
-    <div className="w-full py-4">
-      <StickyScroll content={content} />
-    </div>
+
+    <>
+
+      <div className="h-[20rem] rounded-t-3xl flex items-center justify-center border-t-2 border-purple-500">
+        <div className="text-center">
+          <h1 className="text-6xl font-bold mb-4 text-gray-900 dark:text-white transition-colors duration-500">
+            Kainarck
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-slate-300 transition-colors duration-500">
+            Professional Web Solutions
+          </p>
+        </div>
+      </div>
+      <StickyScrollLenis />
+      <div className="h-[25rem] rounded-b-3xl flex items-center justify-center  border-b-2 border-purple-500">
+      <CallToAction/>
+      </div>
+    </>
   );
 }
