@@ -2,9 +2,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { cn } from "../../lib/utils";
 import { useTheme } from "../../context/ThemeContext";
-import { AnimatedBulletCard } from '../common/AnimatedBulletCard'; // Import the new component
+import { AnimatedBulletCard } from '../common/AnimatedBulletCard';
 
-// Enhanced content data with modern professional styling
+// Enhanced content data
 const contentData = [
   {
     title: "Strategic Web Development",
@@ -78,24 +78,24 @@ const contentData = [
       />
     ),
   },
-  {
-    title: "Premium eCommerce Solutions",
-    subtitle: "Maximize Online Revenue",
-    description:
-      "Build high-converting online stores with cutting-edge design and seamless checkout experiences. Our eCommerce solutions are optimized for sales and customer retention.",
-    content: (
-      <AnimatedBulletCard
-        title="eCommerce Power-Ups"
-        items={[
-          "Custom Store Development",
-          "Secure Payment Gateways",
-          "Inventory & Order Management",
-          "Conversion Rate Optimization",
-          "Scalable Architectures",
-        ]}
-      />
-    ),
-  },
+  // {
+  //   title: "Premium eCommerce Solutions",
+  //   subtitle: "Maximize Online Revenue",
+  //   description:
+  //     "Build high-converting online stores with cutting-edge design and seamless checkout experiences. Our eCommerce solutions are optimized for sales and customer retention.",
+  //   content: (
+  //     <AnimatedBulletCard
+  //       title="eCommerce Power-Ups"
+  //       items={[
+  //         "Custom Store Development",
+  //         "Secure Payment Gateways",
+  //         "Inventory & Order Management",
+  //         "Conversion Rate Optimization",
+  //         "Scalable Architectures",
+  //       ]}
+  //     />
+  //   ),
+  // },
   {
     title: "Search Engine Optimization",
     subtitle: "Dominate Search Results",
@@ -132,238 +132,293 @@ const contentData = [
       />
     ),
   },
-  {
-    title: "Ongoing Support & Growth",
-    subtitle: "Partner for Success",
-    description:
-      "Continuous improvement and support to ensure your digital presence evolves with your business. We provide proactive maintenance, updates, and growth strategies.",
-    content: (
-      <AnimatedBulletCard
-        title="Long-Term Partnership"
-        items={[
-          "Routine Maintenance & Updates",
-          "Performance Monitoring",
-          "Scalability Planning",
-          "Feature Enhancements",
-          "Dedicated Support Team",
-        ]}
-      />
-    ),
-  },
+  // {
+  //   title: "Ongoing Support & Growth",
+  //   subtitle: "Partner for Success",
+  //   description:
+  //     "Continuous improvement and support to ensure your digital presence evolves with your business. We provide proactive maintenance, updates, and growth strategies.",
+  //   content: (
+  //     <AnimatedBulletCard
+  //       title="Long-Term Partnership"
+  //       items={[
+  //         "Routine Maintenance & Updates",
+  //         "Performance Monitoring",
+  //         "Scalability Planning",
+  //         "Feature Enhancements",
+  //         "Dedicated Support Team",
+  //       ]}
+  //     />
+  //   ),
+  // },
 ];
 
-export const StickyScrollLenis = ({ content = contentData, contentClassName }) => {
+export const StepListWithTracingBeam = ({ content = contentData, className }) => {
   const containerRef = useRef(null);
-  const stickyRef = useRef(null);
-  const [activeCard, setActiveCard] = useState(0);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [activeStep, setActiveStep] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const { theme } = useTheme();
 
-  // Theme-aware gradient backgrounds - Dark: Black to Purple, Light: White to Purple
-  const darkBackgroundGradients = [
-    "linear-gradient(135deg, #000000 0%, #1a0033 30%, #2d004d 60%, #4c1d95 100%)",
-    "linear-gradient(135deg, #000000 0%, #1a0033 30%, #2d004d 60%, #4c1d95 100%)",
-    "linear-gradient(135deg, #000000 0%, #1a0033 30%, #2d004d 60%, #4c1d95 100%)",
-    "linear-gradient(135deg, #000000 0%, #1a0033 30%, #2d004d 60%, #4c1d95 100%)",
-    "linear-gradient(135deg, #000000 0%, #1a0033 30%, #2d004d 60%, #4c1d95 100%)",
-    "linear-gradient(135deg, #000000 0%, #1a0033 30%, #2d004d 60%, #4c1d95 100%)",
-    "linear-gradient(135deg, #000000 0%, #1a0033 30%, #2d004d 60%, #4c1d95 100%)",
-    "linear-gradient(135deg, #000000 0%, #1a0033 30%, #2d004d 60%, #4c1d95 100%)",
-    "linear-gradient(135deg, #000000 0%, #1a0033 30%, #2d004d 60%, #4c1d95 100%)",
-  ];
-
-  const lightBackgroundGradients = [
-    "linear-gradient(135deg, #ffffff 0%, #f8fafc 30%, #e2e8f0 60%, #cbd5e1 100%)",
-    "linear-gradient(135deg, #fefefe 0%, #f1f5f9 30%, #e2e8f0 60%, #c7d2fe 100%)",
-    "linear-gradient(135deg, #ffffff 0%, #faf5ff 30%, #f3e8ff 60%, #ddd6fe 100%)",
-    "linear-gradient(135deg, #fefefe 0%, #fdf4ff 30%, #fae8ff 60%, #e879f9 100%)",
-    "linear-gradient(135deg, #ffffff 0%, #f9fafb 30%, #f3f4f6 60%, #d1d5db 100%)",
-    "linear-gradient(135deg, #fefefe 0%, #eef2ff 30%, #e0e7ff 60%, #c7d2fe 100%)",
-    "linear-gradient(135deg, #ffffff 0%, #faf5ff 30%, #f3e8ff 60%, #c4b5fd 100%)",
-    "linear-gradient(135deg, #fefefe 0%, #f8fafc 30%, #e2e8f0 60%, #a78bfa 100%)",
-  ];
-
-  const [currentBackground, setCurrentBackground] = useState(
-    theme === 'dark' ? darkBackgroundGradients[0] : lightBackgroundGradients[0]
-  );
-
-  // Handle mouse movement for 3D effects
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth) * 2 - 1,
-        y: (e.clientY / window.innerHeight) * 2 - 1,
-      });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  // Scroll effect with smooth transitions
   useEffect(() => {
     const handleScroll = () => {
-      if (!containerRef.current || !stickyRef.current) return;
+      if (!containerRef.current) return;
 
-      const containerTop = containerRef.current.offsetTop;
-      const containerHeight = containerRef.current.offsetHeight;
-      const scrollY = window.scrollY + window.innerHeight / 2;
-      const progress = Math.min(Math.max(scrollY - containerTop, 0), containerHeight);
-      const perCardHeight = containerHeight / content.length;
-      const index = Math.floor(progress / perCardHeight);
+      const container = containerRef.current;
+      const containerRect = container.getBoundingClientRect();
+      const containerTop = containerRect.top;
+      const containerHeight = containerRect.height;
+      const windowHeight = window.innerHeight;
 
-      if (index !== activeCard && index >= 0 && index < content.length) {
-        setActiveCard(index);
-      }
+      // Calculate progress through the container
+      const progress = Math.max(0, Math.min(1, (windowHeight - containerTop) / (containerHeight + windowHeight)));
+      setScrollProgress(progress);
+
+      // Calculate active step based on scroll position
+      const stepProgress = progress * content.length;
+      const currentStep = Math.min(Math.floor(stepProgress), content.length - 1);
+      setActiveStep(currentStep);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [content.length, activeCard]);
-
-  // Update background on active card change and theme change
-  useEffect(() => {
-    const gradients = theme === 'dark' ? darkBackgroundGradients : lightBackgroundGradients;
-    setCurrentBackground(gradients[activeCard % gradients.length]);
-  }, [activeCard, theme]);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial call
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [content.length]);
 
   return (
-    <div ref={containerRef} className="relative h-[400vh]">      
-      <div
-        ref={stickyRef}
-        className="sticky top-0 flex h-screen items-center justify-center transition-all duration-1000 ease-out overflow-hidden"
-        style={{
-          background: currentBackground,
-        }}
-      >
-        {/* Animated background elements with theme-aware colors */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Floating orbs */}
-          <div
-            className={cn(
-              "absolute w-96 h-96 rounded-full blur-3xl transition-all duration-1000",
-              theme === 'dark' 
-                ? "bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20" 
-                : "bg-gradient-to-br from-purple-400/30 to-fuchsia-400/30"
-            )}
-            style={{
-              top: '10%',
-              right: '10%',
-              transform: `translate(${mousePosition.x * 30}px, ${mousePosition.y * 30}px) rotate(${activeCard * 45}deg) scale(${1 + activeCard * 0.1})`,
-            }}
-          />
-          <div
-            className={cn(
-              "absolute w-80 h-80 rounded-full blur-3xl transition-all duration-1000",
-              theme === 'dark' 
-                ? "bg-gradient-to-br from-indigo-600/15 to-purple-600/15" 
-                : "bg-gradient-to-br from-indigo-400/25 to-purple-400/25"
-            )}
-            style={{
-              bottom: '20%',
-              left: '15%',
-              transform: `translate(${mousePosition.x * -20}px, ${mousePosition.y * -20}px) rotate(${-activeCard * 30}deg) scale(${0.8 + activeCard * 0.05})`,
-            }}
-          />
-          <div
-            className={cn(
-              "absolute w-64 h-64 rounded-full blur-2xl transition-all duration-1000",
-              theme === 'dark' 
-                ? "bg-gradient-to-br from-pink-500/25 to-rose-500/25" 
-                : "bg-gradient-to-br from-pink-400/35 to-rose-400/35"
-            )}
-            style={{
-              top: '60%',
-              left: '5%',
-              transform: `translate(${mousePosition.x * 15}px, ${mousePosition.y * 15}px) rotate(${activeCard * 60}deg)`,
-            }}
-          />
+    <div 
+      ref={containerRef}
+      className={cn(
+        "relative min-h-screen py-20",
+        theme === 'dark' 
+          ? "bg-gradient-to-br from-gray-900 via-black to-gray-900" 
+          : "bg-gradient-to-br from-gray-50 via-white to-gray-50",
+        className
+      )}
+    >
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div
+          className={cn(
+            "absolute w-96 h-96 rounded-full blur-3xl transition-all duration-1000",
+            theme === 'dark' 
+              ? "bg-gradient-to-br from-purple-500/10 to-fuchsia-500/10" 
+              : "bg-gradient-to-br from-purple-400/20 to-fuchsia-400/20"
+          )}
+          style={{
+            top: '20%',
+            right: '10%',
+            transform: `scale(${1 + scrollProgress * 0.2})`,
+          }}
+        />
+        <div
+          className={cn(
+            "absolute w-80 h-80 rounded-full blur-3xl transition-all duration-1000",
+            theme === 'dark' 
+              ? "bg-gradient-to-br from-indigo-600/8 to-purple-600/8" 
+              : "bg-gradient-to-br from-indigo-400/15 to-purple-400/15"
+          )}
+          style={{
+            bottom: '30%',
+            left: '5%',
+            transform: `scale(${0.8 + scrollProgress * 0.3})`,
+          }}
+        />
+      </div>
 
-          {/* Geometric shapes */}
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className={cn(
-                "absolute w-4 h-4 rounded-full transition-all duration-1000",
-                theme === 'dark' 
-                  ? "bg-purple-400/40" 
-                  : "bg-purple-500/50"
-              )}
-              style={{
-                top: `${20 + i * 12}%`,
-                right: `${5 + i * 8}%`,
-                transform: `
-                  translate(${mousePosition.x * (i + 1) * 5}px, ${mousePosition.y * (i + 1) * 5}px) 
-                  rotate(${activeCard * (i + 1) * 30}deg) 
-                  scale(${0.5 + Math.sin(activeCard + i) * 0.3})
-                `,
-              }}
-            />
-          ))}
-        </div>
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-20">
+            <h2 className={cn(
+              "text-4xl lg:text-5xl font-bold mb-6",
+              theme === 'dark' ? "text-white" : "text-gray-800"
+            )}>
+              Our Development Process
+            </h2>
+            <p className={cn(
+              "text-xl max-w-3xl mx-auto",
+              theme === 'dark' ? "text-gray-300" : "text-gray-700"
+            )}>
+              From concept to launch, we follow a proven methodology that ensures exceptional results
+            </p>
+          </div>
 
-        <div className="relative z-10 flex w-full max-w-7xl items-center justify-between px-6 lg:px-12 gap-16">
-          {/* Left: Enhanced Text Content */}
-          <div className="flex-1 max-w-2xl relative">
-            <div className="relative h-80">
-              {content.map((item, index) => (
-                <div
-                  key={index}
-                  className={cn(
-                    "absolute inset-0 transition-all duration-700 transform",
-                    activeCard === index
-                      ? "opacity-100 translate-y-0 scale-100"
-                      : "opacity-0 translate-y-8 scale-95"
-                  )}
-                >
-                  <div className="space-y-6">
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-3">
-                        <div className={cn(
-                          "w-1 h-8 rounded-full",
-                          theme === 'dark'
-                            ? "bg-gradient-to-b from-purple-400 to-fuchsia-400"
-                            : "bg-gradient-to-b from-purple-600 to-fuchsia-600"
-                        )} />
-                        <span className={cn(
-                          "text-sm font-medium uppercase tracking-wider",
-                          theme === 'dark' ? "text-purple-300" : "text-purple-700"
-                        )}>
-                          Step {index + 1}
-                        </span>
-                      </div>
-                      <h2 className={cn(
-                        "text-4xl font-bold leading-tight",
-                        theme === 'dark' ? "text-white" : "text-gray-900"
-                      )}>
-                        {item.title}
-                      </h2>
-                      <p className={cn(
-                        "text-xl font-medium",
-                        theme === 'dark' ? "text-purple-200" : "text-purple-800"
-                      )}>
-                        {item.subtitle}
-                      </p>
+          {/* Step List */}
+          <div className="relative">
+            {/* Tracing Beam Line */}
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 overflow-hidden">
+              {/* Background line */}
+              <div className={cn(
+                "absolute inset-0 w-full",
+                theme === 'dark' ? "bg-gray-700" : "bg-gray-200"
+              )} />
+              
+              {/* Animated progress line */}
+              <div
+                className={cn(
+                  "absolute top-0 left-0 w-full transition-all duration-300 ease-out",
+                  theme === 'dark'
+                    ? "bg-gradient-to-b from-purple-500 via-fuchsia-500 to-purple-600"
+                    : "bg-gradient-to-b from-purple-500 via-fuchsia-500 to-purple-600"
+                )}
+                style={{
+                  height: `${scrollProgress * 100}%`,
+                  boxShadow: theme === 'dark' 
+                    ? '0 0 20px rgba(168, 85, 247, 0.5)' 
+                    : '0 0 20px rgba(168, 85, 247, 0.6)',
+                }}
+              />
+
+              {/* Glowing orb at the end of progress line */}
+              <div
+                className={cn(
+                  "absolute w-4 h-4 rounded-full -left-1.5 transition-all duration-300",
+                  theme === 'dark'
+                    ? "bg-gradient-to-r from-purple-400 to-fuchsia-400 shadow-lg shadow-purple-500/50"
+                    : "bg-gradient-to-r from-purple-500 to-fuchsia-500 shadow-lg shadow-purple-500/60"
+                )}
+                style={{
+                  top: `${scrollProgress * 100}%`,
+                  transform: 'translateY(-50%)',
+                }}
+              />
+            </div>
+
+            {/* Steps */}
+            <div className="space-y-16">
+              {content.map((step, index) => (
+                <div key={index} className="relative overflow flex items-start">
+                  {/* Step Number */}
+                  <div className="relative z-10 flex-shrink-0">
+                    <div
+                      className={cn(
+                        "w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold transition-all duration-500 border-4",
+                        activeStep >= index
+                          ? cn(
+                              theme === 'dark'
+                                ? "bg-gradient-to-br from-purple-500 to-fuchsia-500 border-purple-400 text-white shadow-lg shadow-purple-500/30"
+                                : "bg-gradient-to-br from-purple-500 to-fuchsia-500 border-purple-400 text-white shadow-lg shadow-purple-500/40"
+                            )
+                          : cn(
+                              theme === 'dark'
+                                ? "bg-gray-800 border-gray-600 text-gray-400"
+                                : "bg-white border-gray-200 text-gray-400 shadow-lg"
+                            )
+                      )}
+                      style={{
+                        transform: activeStep >= index ? 'scale(1.1)' : 'scale(1)',
+                      }}
+                    >
+                      {index + 1}
                     </div>
-                    <p className={cn(
-                      "text-lg leading-relaxed",
-                      theme === 'dark' ? "text-gray-300" : "text-gray-700"
-                    )}>
-                      {item.description}
-                    </p>
-                    <div className="flex items-center space-x-2 pt-4">
-                      <div className={cn(
-                        "w-12 h-0.5 rounded-full",
-                        theme === 'dark'
-                          ? "bg-gradient-to-r from-purple-400 to-fuchsia-400"
-                          : "bg-gradient-to-r from-purple-600 to-fuchsia-600"
-                      )} />
-                      <span className={cn(
-                        "text-sm",
-                        theme === 'dark' ? "text-gray-400" : "text-gray-600"
-                      )}>
-                        Kainarck Solution
-                      </span>
+
+                    {/* Pulse animation for active step */}
+                    {activeStep === index && (
+                      <div
+                        className={cn(
+                          "absolute inset-0 w-16 h-16 rounded-full animate-ping",
+                          theme === 'dark'
+                            ? "bg-purple-500/30"
+                            : "bg-purple-500/40"
+                        )}
+                      />
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <div className="ml-8 overflow-hidden flex-1">
+                    <div
+                      className={cn(
+                        "transition-all duration-700 transform lg:flex lg:gap-x-3",
+                        activeStep >= index
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-50 translate-y-4"
+                      )}
+                    >
+                      {/* Text Content */}
+                      <div className="mb-8">
+                        <div className="flex items-center space-x-3 mb-4">
+                          <div className={cn(
+                            "w-1 h-8 rounded-full",
+                            activeStep >= index
+                              ? (theme === 'dark'
+                                  ? "bg-gradient-to-b from-purple-400 to-fuchsia-400"
+                                  : "bg-gradient-to-b from-purple-500 to-fuchsia-500")
+                              : (theme === 'dark' ? "bg-gray-600" : "bg-gray-200")
+                          )} />
+                          <span className={cn(
+                            "text-sm font-medium uppercase tracking-wider",
+                            activeStep >= index
+                              ? (theme === 'dark' ? "text-purple-300" : "text-purple-600")
+                              : (theme === 'dark' ? "text-gray-500" : "text-gray-500")
+                          )}>
+                            Step {index + 1}
+                          </span>
+                        </div>
+                        
+                        <h3 className={cn(
+                          "text-3xl lg:text-4xl font-bold mb-3",
+                          activeStep >= index
+                            ? (theme === 'dark' ? "text-white" : "text-gray-800")
+                            : (theme === 'dark' ? "text-gray-400" : "text-gray-400")
+                        )}>
+                          {step.title}
+                        </h3>
+                        
+                        <p className={cn(
+                          "text-xl font-medium mb-4",
+                          activeStep >= index
+                            ? (theme === 'dark' ? "text-purple-200" : "text-purple-700")
+                            : (theme === 'dark' ? "text-gray-500" : "text-gray-500")
+                        )}>
+                          {step.subtitle}
+                        </p>
+                        
+                        <p className={cn(
+                          "text-lg leading-relaxed max-w-2xl",
+                          activeStep >= index
+                            ? (theme === 'dark' ? "text-gray-300" : "text-gray-600")
+                            : (theme === 'dark' ? "text-gray-500" : "text-gray-500")
+                        )}>
+                          {step.description}
+                        </p>
+                      </div>
+
+                      {/* Interactive Card */}
+                      <div className="max-w-md">
+                        <div
+                          className={cn(
+                            "relative rounded-2xl overflow-hidden transition-all duration-700 border",
+                            activeStep >= index
+                              ? cn(
+                                  "transform scale-100 opacity-100",
+                                  theme === 'dark'
+                                    ? "bg-gradient-to-br from-gray-800/80 to-gray-900/90 backdrop-blur-xl border-purple-500/30 shadow-2xl shadow-purple-500/10"
+                                    : "bg-gradient-to-br from-white/95 to-gray-50/90 backdrop-blur-xl border-purple-400/30 shadow-2xl shadow-purple-500/15"
+                                )
+                              : cn(
+                                  "transform scale-95 opacity-40",
+                                  theme === 'dark'
+                                    ? "bg-gray-800/40 border-gray-600/30"
+                                    : "bg-gray-50/60 border-gray-200/40"
+                                )
+                          )}
+                        >
+                          {step.content}
+
+                          {/* Animated border for active step */}
+                          {activeStep === index && (
+                            <div
+                              className="absolute inset-0 rounded-2xl opacity-60 pointer-events-none"
+                              style={{
+                                background: `conic-gradient(from 0deg, transparent, ${
+                                  theme === 'dark' ? 'rgba(168, 85, 247, 0.3)' : 'rgba(168, 85, 247, 0.4)'
+                                }, transparent)`,
+                                animation: 'spin 3s linear infinite',
+                              }}
+                            />
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -371,150 +426,49 @@ export const StickyScrollLenis = ({ content = contentData, contentClassName }) =
             </div>
           </div>
 
-          {/* Right: 3D Card with Enhanced Animations */}
-          <div className="hidden lg:block relative">
-            <div
-              className="relative w-96 h-80 perspective-1000"
-              style={{
-                transform: `
-                  rotateY(${activeCard * 3 + mousePosition.x * 10}deg) 
-                  rotateX(${Math.sin(activeCard) * 2 + mousePosition.y * -5}deg)
-                `,
-                transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-              }}
-            >
-              {/* Card shadow */}
-              <div
-                className={cn(
-                  "absolute inset-0 rounded-2xl blur-xl transform translate-y-8 scale-105 transition-all duration-800",
-                  theme === 'dark' ? "bg-black/40" : "bg-gray-900/20"
-                )}
-                style={{
-                  transform: `translateY(${12 + activeCard * 2}px) scale(${1.05 + activeCard * 0.02})`,
-                }}
-              />
-
-              {/* Main card */}
-              <div
-                className={cn(
-                  "relative w-full h-full rounded-2xl overflow-hidden transform-gpu transition-all duration-700 border",
-                  theme === 'dark'
-                    ? "bg-gradient-to-br from-gray-900/80 to-black/90 backdrop-blur-xl border-purple-500/30 shadow-2xl shadow-purple-500/25"
-                    : "bg-gradient-to-br from-white/90 to-gray-50/95 backdrop-blur-xl border-purple-300/40 shadow-2xl shadow-purple-500/20",
-                  contentClassName
-                )}
-                style={{
-                  transform: `
-                    rotateX(${Math.sin(activeCard * 0.5) * 3}deg) 
-                    rotateY(${Math.cos(activeCard * 0.3) * 3}deg) 
-                    translateZ(20px)
-                  `,
-                }}
-              >
-                {/* Card content with smooth transitions */}
-                <div className="relative h-full w-full">
-                  {content.map((item, index) => (
-                    <div
-                      key={index}
-                      className={cn(
-                        "absolute inset-0 transition-all duration-700 transform",
-                        activeCard === index
-                          ? "opacity-100 scale-100 rotate-0"
-                          : "opacity-0 scale-95 rotate-3"
-                      )}
-                    >
-                      {item.content}
-                    </div>
-                  ))}
-                </div>
-
-                {/* Animated border glow */}
+          {/* Progress indicator */}
+          <div className="mt-20 text-center">
+            <div className="flex justify-center space-x-2 mb-4">
+              {content.map((_, index) => (
                 <div
-                  className="absolute inset-0 rounded-2xl transition-opacity duration-700 opacity-60"
-                  style={{
-                    background: `conic-gradient(from ${activeCard * 90}deg, transparent, ${
-                      theme === 'dark' ? 'rgba(168, 85, 247, 0.3)' : 'rgba(147, 51, 234, 0.2)'
-                    }, transparent)`,
-                  }}
+                  key={index}
+                  className={cn(
+                    "h-2 rounded-full transition-all duration-300",
+                    activeStep >= index
+                      ? cn(
+                          "w-8",
+                          theme === 'dark' 
+                            ? "bg-gradient-to-r from-purple-400 to-fuchsia-400" 
+                            : "bg-gradient-to-r from-purple-500 to-fuchsia-500"
+                        )
+                      : cn(
+                          "w-2",
+                          theme === 'dark' ? "bg-gray-600" : "bg-gray-200"
+                        )
+                  )}
                 />
-              </div>
-
-              {/* Floating elements */}
-              <div
-                className={cn(
-                  "absolute -top-4 -right-4 w-8 h-8 rounded-full transition-all duration-700",
-                  theme === 'dark'
-                    ? "bg-gradient-to-br from-purple-400 to-fuchsia-400"
-                    : "bg-gradient-to-br from-purple-500 to-fuchsia-500"
-                )}
-                style={{
-                  transform: `rotate(${activeCard * 45}deg) scale(${0.8 + Math.sin(activeCard) * 0.2})`,
-                }}
-              />
-              <div
-                className={cn(
-                  "absolute -bottom-4 -left-4 w-6 h-6 rounded-full transition-all duration-700",
-                  theme === 'dark'
-                    ? "bg-gradient-to-br from-pink-400 to-rose-400"
-                    : "bg-gradient-to-br from-pink-500 to-rose-500"
-                )}
-                style={{
-                  transform: `rotate(${-activeCard * 30}deg) scale(${0.6 + Math.cos(activeCard) * 0.2})`,
-                }}
-              />
-
-              {/* Orbiting elements */}
-              <div className="absolute inset-0 -z-10">
-                {[...Array(3)].map((_, i) => (
-                  <div
-                    key={i}
-                    className={cn(
-                      "absolute w-6 h-6 rounded-full transition-all duration-1000",
-                      theme === 'dark' 
-                        ? "bg-purple-500/30" 
-                        : "bg-purple-400/40"
-                    )}
-                    style={{
-                      top: '50%',
-                      left: '50%',
-                      transform: `
-                        translate(-50%, -50%) 
-                        rotate(${activeCard * 0.5 * (i + 1)}rad) 
-                        translateX(${200 + i * 50}px) 
-                        rotate(${-activeCard * 0.5 * (i + 1)}rad)
-                        scale(${0.5 + Math.sin(activeCard + i) * 0.3})
-                      `,
-                    }}
-                  />
-                ))}
-              </div>
+              ))}
+            </div>
+            <div className={cn(
+              "text-sm",
+              theme === 'dark' ? "text-gray-400" : "text-gray-500"
+            )}>
+              Step {activeStep + 1} of {content.length}
             </div>
           </div>
         </div>
-
-        {/* Progress indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {content.map((_, index) => (
-            <div
-              key={index}
-              className={cn(
-                "h-2 rounded-full transition-all duration-300",
-                activeCard === index
-                  ? cn(
-                      "w-8",
-                      theme === 'dark' 
-                        ? "bg-gradient-to-r from-purple-400 to-fuchsia-400" 
-                        : "bg-gradient-to-r from-purple-600 to-fuchsia-600"
-                    )
-                  : cn(
-                      "w-2",
-                      theme === 'dark' ? "bg-white/30" : "bg-black/30"
-                    )
-              )}
-            />
-          ))}
-        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+      `}</style>
     </div>
   );
 };
